@@ -14,14 +14,15 @@ class ListNavigationController: UIViewController {
 
         navigationItem.title = "On The Map"
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_pin"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(addPinButtonPress))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "power"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(logoutPressed))
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_refresh"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(refreshButtonPressed))
     }
     
-    
-    @objc func addPinButtonPress() {
+    @objc func logoutPressed() {
         // MARK: - post a pin
+        OnTheMapClient.logout()
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc func refreshButtonPressed(){

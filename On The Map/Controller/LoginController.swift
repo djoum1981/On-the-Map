@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class LoginController: UIViewController {
 
@@ -18,16 +19,28 @@ class LoginController: UIViewController {
         loginField.becomeFirstResponder()
         loginField.delegate = self
         passwordField.delegate = self
+        
+        //print(OnTheMapClient.shared())
+        
     }
 
 
     @IBAction func loginPressed(_ sender: UIButton) {
+        
+        if passwordField.isFirstResponder {
+            passwordField.endEditing(true)
+        }else{
+            loginField.endEditing(true)
+        }
         signIn()
-       
     }
     
     
     @IBAction func signUpPressed(_ sender: UIButton) {
+        if let url = URL(string: "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com"){
+            let safaryVC = SFSafariViewController(url: url)
+            present(safaryVC, animated: true, completion: nil)
+        }
     }
     
     
@@ -40,6 +53,16 @@ class LoginController: UIViewController {
         
         if login != "" && password != ""{
             //-MARK: show the next page
+            OnTheMapClient.login(userEmail: login!, userPassword: password!) { (success, error) in
+                if success{
+                    DispatchQueue.main.async {
+                        print("login success")
+                        self.performSegue(withIdentifier: "TabBarEntrySequee", sender: nil)
+                    }
+                }else{
+                    print("Unable to login in")
+                }
+            }
         }
     }
 }
@@ -64,14 +87,9 @@ extension LoginController: UITextFieldDelegate{
    
   
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        if textField == loginField && textField.text == ""{
-            textField.placeholder = "Please enter you user name"
-            return false
-        }else if textField == passwordField && textField.text == ""{
-            textField.placeholder = "Please enter your password"
-            return false
-        }
-        return true
+       return true
     }
+    
+   
 }
 

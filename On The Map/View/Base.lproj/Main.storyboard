@@ -24,22 +24,22 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="Q3L-zQ-OO2">
-                                <rect key="frame" x="16" y="235" width="343" height="167"/>
+                                <rect key="frame" x="16" y="235" width="343" height="166"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4j7-0L-Vjn">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="41"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="julienlaurent@my.uopeople.edu" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4j7-0L-Vjn">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="40"/>
                                         <color key="backgroundColor" red="1" green="0.83551317449999996" blue="0.44658690690000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dea-4I-sgD">
-                                        <rect key="frame" x="0.0" y="62" width="343" height="40"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Djoum01161981" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dea-4I-sgD">
+                                        <rect key="frame" x="0.0" y="61" width="343" height="40"/>
                                         <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPM-cO-NB6">
-                                        <rect key="frame" x="0.0" y="123" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="122" width="343" height="44"/>
                                         <color key="backgroundColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="23"/>
                                         <state key="normal" title="Login">
@@ -47,7 +47,6 @@
                                         </state>
                                         <connections>
                                             <action selector="loginPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c7S-hY-LoA"/>
-                                            <segue destination="E98-2b-NKU" kind="show" id="Dov-AG-rwu"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -69,14 +68,14 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JsZ-7r-LzM">
-                                <rect key="frame" x="16" y="422" width="242" height="31.5"/>
+                                <rect key="frame" x="16" y="421" width="242" height="31.5"/>
                                 <color key="backgroundColor" red="1" green="0.71096493620000001" blue="0.31654358220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="23"/>
                                 <color key="textColor" systemColor="systemBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="23G-MI-1Wz">
-                                <rect key="frame" x="258" y="415.5" width="101" height="45"/>
+                                <rect key="frame" x="258" y="414.5" width="101" height="45"/>
                                 <color key="backgroundColor" red="1" green="0.71096493620000001" blue="0.31654358220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
                                 <state key="normal" title="Sign up"/>
@@ -110,6 +109,7 @@
                     <connections>
                         <outlet property="loginField" destination="4j7-0L-Vjn" id="7E2-Fg-wSi"/>
                         <outlet property="passwordField" destination="dea-4I-sgD" id="opf-Ub-aTy"/>
+                        <segue destination="E98-2b-NKU" kind="show" identifier="TabBarEntrySequee" id="uaS-5A-k39"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -188,6 +188,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="721-5A-n2A"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hQs-yO-NAz">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -203,7 +204,7 @@
         <!--Navigation Controller-->
         <scene sceneID="VH2-yM-zUi">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Hed-ID-uR1" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="currentContext" id="Hed-ID-uR1" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="mappin.and.ellipse" catalog="system" selectedImage="mappin.and.ellipse" id="J0z-T7-eeO"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="asv-KK-nq0">

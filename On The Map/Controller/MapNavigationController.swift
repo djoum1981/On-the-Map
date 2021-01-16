@@ -19,6 +19,14 @@ class MapNavigationController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_refresh"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(refreshButtonPressed))
     }
     
+    var studentLocations = [UserInfo]()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        OnTheMapClient.getUsersLocation { (locations, error) in
+            self.studentLocations = locations ?? []
+        }
+    }
 
     @objc func addPinButtonPress() {
         // MARK: - post a pin
