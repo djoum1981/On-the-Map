@@ -19,6 +19,7 @@
 		1D4723F625ADE87F0013DA40 /* OnTheMapClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4723F525ADE87F0013DA40 /* OnTheMapClient.swift */; };
 		1D4723FD25AF39D40013DA40 /* TaskHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4723FC25AF39D40013DA40 /* TaskHelper.swift */; };
 		1D47240025AF6D1B0013DA40 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4723FF25AF6D1B0013DA40 /* LoginResponse.swift */; };
+		1DB7817F25B3CC4900D87746 /* PostLocationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB7817E25B3CC4900D87746 /* PostLocationResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		1D4723F525ADE87F0013DA40 /* OnTheMapClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapClient.swift; sourceTree = "<group>"; };
 		1D4723FC25AF39D40013DA40 /* TaskHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskHelper.swift; path = "On The Map/model/Network/TaskHelper.swift"; sourceTree = SOURCE_ROOT; };
 		1D4723FF25AF6D1B0013DA40 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		1DB7817E25B3CC4900D87746 /* PostLocationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocationResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 			children = (
 				1D4723FF25AF6D1B0013DA40 /* LoginResponse.swift */,
 				1D16736D25B167950045D66A /* UserInfo.swift */,
+				1DB7817E25B3CC4900D87746 /* PostLocationResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				1D4723FD25AF39D40013DA40 /* TaskHelper.swift in Sources */,
 				1D47240025AF6D1B0013DA40 /* LoginResponse.swift in Sources */,
 				1D1C11DC25AD5A8900189E84 /* ListNavigationController.swift in Sources */,
+				1DB7817F25B3CC4900D87746 /* PostLocationResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

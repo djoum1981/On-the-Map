@@ -7,33 +7,63 @@
 // contains information of the log in student
 import Foundation
 
-struct UserLocation: Codable {
-    let userInfo: [UserInfo]
-}
 
-struct UserInfo: Codable {
-    let createdAt, firstName, lastName: String
-    let latitude, longitude: Double
-    let mapString: String
-    let mediaURL: String
-    let objectID, uniqueKey, updatedAt: String
+struct UserLocation : Codable {
+        let results : [UserInfo]?
 
-    enum CodingKeys: String, CodingKey {
-        case createdAt, firstName, lastName, latitude, longitude, mapString, mediaURL
-        case objectID = "objectId"
-        case uniqueKey, updatedAt
-    }
+        enum CodingKeys: String, CodingKey {
+                case results = "results"
+        }
     
-    init(_ data: [String: AnyObject]) {
-            self.createdAt = data["createdAt"] as? String ?? ""
-              self.uniqueKey = data["uniqueKey"] as? String ?? ""
-              self.firstName = data["firstName"] as? String ?? ""
-              self.lastName = data["lastName"] as? String ?? ""
-              self.mapString = data["mapString"] as? String ?? ""
-              self.mediaURL = data["mediaURL"] as? String ?? ""
-              self.latitude = data["latitude"] as? Double ?? 0.0
-              self.longitude = data["longitude"] as? Double ?? 0.0
-                self.objectID = data["objectId"] as? String ?? ""
-              self.updatedAt = data["updatedAt"] as? String ?? ""
-    }
+        init(from decoder: Decoder) throws {
+                let values = try decoder.container(keyedBy: CodingKeys.self)
+                results = try values.decodeIfPresent([UserInfo].self, forKey: .results)
+        }
 }
+
+
+struct UserInfo : Codable {
+
+        let createdAt : String?
+        let firstName : String?
+        let lastName : String?
+        let latitude : Float?
+        let longitude : Float?
+        let mapString : String?
+        let mediaURL : String?
+        let objectId : String?
+        let uniqueKey : String?
+        let updatedAt : String?
+
+        enum CodingKeys: String, CodingKey {
+                case createdAt = "createdAt"
+                case firstName = "firstName"
+                case lastName = "lastName"
+                case latitude = "latitude"
+                case longitude = "longitude"
+                case mapString = "mapString"
+                case mediaURL = "mediaURL"
+                case objectId = "objectId"
+                case uniqueKey = "uniqueKey"
+                case updatedAt = "updatedAt"
+        }
+    
+    
+    
+    
+        init(from decoder: Decoder) throws {
+                let values = try decoder.container(keyedBy: CodingKeys.self)
+                createdAt = try values.decodeIfPresent(String.self, forKey: .createdAt)
+                firstName = try values.decodeIfPresent(String.self, forKey: .firstName)
+                lastName = try values.decodeIfPresent(String.self, forKey: .lastName)
+                latitude = try values.decodeIfPresent(Float.self, forKey: .latitude)
+                longitude = try values.decodeIfPresent(Float.self, forKey: .longitude)
+                mapString = try values.decodeIfPresent(String.self, forKey: .mapString)
+                mediaURL = try values.decodeIfPresent(String.self, forKey: .mediaURL)
+                objectId = try values.decodeIfPresent(String.self, forKey: .objectId)
+                uniqueKey = try values.decodeIfPresent(String.self, forKey: .uniqueKey)
+                updatedAt = try values.decodeIfPresent(String.self, forKey: .updatedAt)
+        }
+    
+}
+

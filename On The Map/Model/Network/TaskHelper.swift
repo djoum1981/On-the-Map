@@ -23,14 +23,11 @@ class TaskHelper {
             }
             let decoder = JSONDecoder()
             do{
-                let newData = data.subdata(in: 7..<data.count)
-                print(String(data: newData, encoding: .utf8)!)
                 let responseObject = try decoder.decode(ResponseType.self, from: data)
                 DispatchQueue.main.async {
                     completion(responseObject, nil)
                 }
             }catch{
-                print(error)
                 DispatchQueue.main.async {
                     completion(nil, error)
                 }
@@ -38,7 +35,6 @@ class TaskHelper {
         }
         task.resume()
     }
-    
     
     //will use to post or put
     class func taskForPostRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: String, method: String?, completion: @escaping(ResponseType?, Error?)->Void) {

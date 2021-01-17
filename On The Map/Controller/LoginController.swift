@@ -21,7 +21,6 @@ class LoginController: UIViewController {
         passwordField.delegate = self
         
         //print(OnTheMapClient.shared())
-        
     }
 
 
@@ -90,6 +89,9 @@ extension LoginController: UITextFieldDelegate{
        return true
     }
     
-   
+    func test(p: String?) {
+        let test = p == "PUT" ? "PUT" : "POST"
+        print(test)
+    }
 }
 
