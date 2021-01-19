@@ -179,6 +179,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="PMD-TP-BRu"/>
+                    <connections>
+                        <outlet property="userLocationsTBV" destination="7Ty-BG-fHU" id="hwE-8q-i5v"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5NQ-Tm-naW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

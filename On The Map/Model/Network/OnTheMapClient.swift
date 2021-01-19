@@ -14,11 +14,11 @@ class OnTheMapClient {
         let ontheMapClient = OnTheMapClient()
         return ontheMapClient
     }()
-
+    
     class func shared() -> OnTheMapClient {
         return shareOnTheMapClient
     }
-
+    
     struct Auth {
         static var sessionID: String? = nil
         static var key: String = ""
@@ -39,7 +39,7 @@ class OnTheMapClient {
         case delete
         case userInfo
         
-
+        
         var stringValue: String{
             switch self {
             case .getLocationList:
@@ -65,18 +65,12 @@ class OnTheMapClient {
     }
     
     class func login(userEmail: String, userPassword: String, completion: @escaping(Bool, Error?)->Void) {
-       let body = "{\"udacity\": {\"username\": \"\(userEmail)\", \"password\": \"\(userPassword)\"}}"
+        let body = "{\"udacity\": {\"username\": \"\(userEmail)\", \"password\": \"\(userPassword)\"}}"
         TaskHelper.taskForPostRequest(url: EndPoints.login.url, responseType: LoginResponse.self, body: body, method: nil) { (response, error) in
             if let response = response{
                 Auth.sessionID = response.session.id
                 Auth.key = response.account.key
                 completion(true, nil)
-//                getLoginUserInfo { (success, error) in
-//                    if success{
-//                        print("sucessfully retrieve user info")
-//                    }
-//                }
-                //MARK: test
                 print("session id is retrieved \(Auth.sessionID!)")
             }else{
                 completion(false, nil)

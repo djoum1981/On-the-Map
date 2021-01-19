@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 
 class MapNavigationController: UIViewController {
-
+    
     @IBOutlet weak var map: MKMapView!
     var mapAnotations = [MKPointAnnotation]()
     var resetMap = true
@@ -38,7 +38,7 @@ class MapNavigationController: UIViewController {
         super.viewDidAppear(animated)
         getPinsForMap()
     }
-
+    
     @objc func addPinButtonPress() {
         // MARK: - post a pin
     }
@@ -69,32 +69,31 @@ class MapNavigationController: UIViewController {
         DispatchQueue.main.async {
             self.map.addAnnotations(self.mapAnotations)
         }
-        }
     }
+}
 
 extension MapNavigationController: MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"
-                var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-                if pinView == nil {
-                    pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-                    pinView!.canShowCallout = true
-                    pinView!.pinTintColor = .red
-                    pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-                }
-                else {
-                    pinView!.annotation = annotation
-                }
-                return pinView
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.pinTintColor = .red
+            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        return pinView
     }
     
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView{
-            let app = UIApplication.shared
             if let linkToOpen = view.annotation?.subtitle{
                 if let url = URL(string: linkToOpen ?? ""){
-                    app.openURL(url)
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }
             }
         }

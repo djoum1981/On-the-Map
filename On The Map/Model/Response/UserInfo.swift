@@ -9,61 +9,61 @@ import Foundation
 
 
 struct UserLocation : Codable {
-        let results : [UserInfo]?
-
-        enum CodingKeys: String, CodingKey {
-                case results = "results"
-        }
+    let results : [UserInfo]?
     
-        init(from decoder: Decoder) throws {
-                let values = try decoder.container(keyedBy: CodingKeys.self)
-                results = try values.decodeIfPresent([UserInfo].self, forKey: .results)
-        }
+    enum CodingKeys: String, CodingKey {
+        case results = "results"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        results = try values.decodeIfPresent([UserInfo].self, forKey: .results)
+    }
 }
 
 
 struct UserInfo : Codable {
-
-        let createdAt : String?
-        let firstName : String?
-        let lastName : String?
-        let latitude : Float?
-        let longitude : Float?
-        let mapString : String?
-        let mediaURL : String?
-        let objectId : String?
-        let uniqueKey : String?
-        let updatedAt : String?
-
-        enum CodingKeys: String, CodingKey {
-                case createdAt = "createdAt"
-                case firstName = "firstName"
-                case lastName = "lastName"
-                case latitude = "latitude"
-                case longitude = "longitude"
-                case mapString = "mapString"
-                case mediaURL = "mediaURL"
-                case objectId = "objectId"
-                case uniqueKey = "uniqueKey"
-                case updatedAt = "updatedAt"
-        }
+    
+    let createdAt : String?
+    let firstName : String?
+    let lastName : String?
+    let latitude : Float?
+    let longitude : Float?
+    let mapString : String?
+    let mediaURL : String?
+    let objectId : String?
+    let uniqueKey : String?
+    let updatedAt : String?
+    
+    enum CodingKeys: String, CodingKey {
+        case createdAt = "createdAt"
+        case firstName = "firstName"
+        case lastName = "lastName"
+        case latitude = "latitude"
+        case longitude = "longitude"
+        case mapString = "mapString"
+        case mediaURL = "mediaURL"
+        case objectId = "objectId"
+        case uniqueKey = "uniqueKey"
+        case updatedAt = "updatedAt"
+    }
     
     
     
     
-        init(from decoder: Decoder) throws {
-                let values = try decoder.container(keyedBy: CodingKeys.self)
-                createdAt = try values.decodeIfPresent(String.self, forKey: .createdAt)
-                firstName = try values.decodeIfPresent(String.self, forKey: .firstName)
-                lastName = try values.decodeIfPresent(String.self, forKey: .lastName)
-                latitude = try values.decodeIfPresent(Float.self, forKey: .latitude)
-                longitude = try values.decodeIfPresent(Float.self, forKey: .longitude)
-                mapString = try values.decodeIfPresent(String.self, forKey: .mapString)
-                mediaURL = try values.decodeIfPresent(String.self, forKey: .mediaURL)
-                objectId = try values.decodeIfPresent(String.self, forKey: .objectId)
-                uniqueKey = try values.decodeIfPresent(String.self, forKey: .uniqueKey)
-                updatedAt = try values.decodeIfPresent(String.self, forKey: .updatedAt)
-        }
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        createdAt = try values.decodeIfPresent(String.self, forKey: .createdAt)
+        firstName = try values.decodeIfPresent(String.self, forKey: .firstName)
+        lastName = try values.decodeIfPresent(String.self, forKey: .lastName)
+        latitude = try values.decodeIfPresent(Float.self, forKey: .latitude)
+        longitude = try values.decodeIfPresent(Float.self, forKey: .longitude)
+        mapString = try values.decodeIfPresent(String.self, forKey: .mapString)
+        mediaURL = try values.decodeIfPresent(String.self, forKey: .mediaURL)
+        objectId = try values.decodeIfPresent(String.self, forKey: .objectId)
+        uniqueKey = try values.decodeIfPresent(String.self, forKey: .uniqueKey)
+        updatedAt = try values.decodeIfPresent(String.self, forKey: .updatedAt)
+    }
     
 }
 

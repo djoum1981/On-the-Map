@@ -9,7 +9,7 @@ import UIKit
 import SafariServices
 
 class LoginController: UIViewController {
-
+    
     @IBOutlet weak var loginField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
@@ -22,8 +22,8 @@ class LoginController: UIViewController {
         
         //print(OnTheMapClient.shared())
     }
-
-
+    
+    
     @IBAction func loginPressed(_ sender: UIButton) {
         
         if passwordField.isFirstResponder {
@@ -83,10 +83,10 @@ extension LoginController: UITextFieldDelegate{
             signIn()
         }
     }
-   
-  
+    
+    
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-       return true
+        return true
     }
     
     func test(p: String?) {
