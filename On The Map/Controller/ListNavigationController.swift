@@ -76,6 +76,8 @@ extension ListNavigationController: UITableViewDelegate, UITableViewDataSource{
             if let url = URL(string: urlString){
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
+        }else{
+            print("no url")
         }
     }
 }

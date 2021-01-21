@@ -24,8 +24,8 @@ class OnTheMapClient {
         static var key: String = ""
         static var expiration: String? = nil
         static var objectId = ""
-        static var studentFirstName = ""
-        static var studentLastName = ""
+        static var studentFirstName = "John"
+        static var studentLastName = "Louis"
     }
     
     enum EndPoints {
@@ -72,6 +72,7 @@ class OnTheMapClient {
                 Auth.key = response.account.key
                 completion(true, nil)
                 print("session id is retrieved \(Auth.sessionID!)")
+                print("Key \(Auth.key)")
             }else{
                 completion(false, nil)
                 print("unable to retrieve session id")
@@ -136,7 +137,7 @@ class OnTheMapClient {
     }
     
     //to update location
-    class func updateUserLocation(userInfo: UserInfo, completion: @escaping(Bool, Error?)->Void){
+    class func updateUserLocation(userInfo: LocationInfo, completion: @escaping(Bool, Error?)->Void){
         let body = "{\"uniqueKey\": \"\(userInfo.uniqueKey ?? "")\", \"firstName\": \"\(userInfo.firstName ?? "")\", \"lastName\": \"\(userInfo.lastName ?? "")\",\"mapString\": \"\(userInfo.mapString ?? "")\", \"mediaURL\": \"\(userInfo.mediaURL ?? "")\",\"latitude\": \(userInfo.latitude ?? 0.0), \"longitude\": \(userInfo.longitude ?? 0.0)}"
         TaskHelper.taskForPostRequest(url: EndPoints.upDateALocation.url, responseType:UpdateResponse.self, body: body, method: "PUT") { (response, error) in
             if error != nil{return}

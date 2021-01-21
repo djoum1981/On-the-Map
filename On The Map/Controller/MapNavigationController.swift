@@ -40,7 +40,11 @@ class MapNavigationController: UIViewController {
     }
     
     @objc func addPinButtonPress() {
-        // MARK: - post a pin
+        if let addCurrentUserLocationVC = storyboard?.instantiateViewController(identifier: "AddCurrentUserLocationID"){
+            addCurrentUserLocationVC.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(addCurrentUserLocationVC, animated: true)
+        }
+        
     }
     
     @objc func refreshButtonPressed(){
@@ -57,7 +61,6 @@ class MapNavigationController: UIViewController {
             let longitude = CLLocationDegrees(location.longitude ?? 0.0)
             let mediaURL = location.mediaURL
             let mapAnotationTitle = "\(location.firstName ?? "") \(location.lastName ?? "")"
-            
             let mapCoordonate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             let anAnotation = MKPointAnnotation()
             anAnotation.coordinate = mapCoordonate

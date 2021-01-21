@@ -146,6 +146,117 @@
             </objects>
             <point key="canvasLocation" x="2496.8000000000002" y="-242.42878560719643"/>
         </scene>
+        <!--AddLocation-->
+        <scene sceneID="cru-WD-3qz">
+            <objects>
+                <viewController storyboardIdentifier="AddCurrentUserLocationID" title="AddLocation" modalPresentationStyle="currentContext" id="yfr-xJ-2QV" customClass="AddCurrentUserLocation" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7pA-ud-20U">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hYI-6w-nHN">
+                                <rect key="frame" x="0.0" y="8" width="375" height="659"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tap Here to Enter Location " textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GQQ-HL-T7e">
+                                        <rect key="frame" x="8" y="481" width="359" height="170"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="search"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you studying today?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hpT-vP-nKc">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="481"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="hpT-vP-nKc" firstAttribute="leading" secondItem="hYI-6w-nHN" secondAttribute="leading" id="2V3-ZJ-iwd"/>
+                                    <constraint firstAttribute="bottom" secondItem="GQQ-HL-T7e" secondAttribute="bottom" constant="8" id="Srt-4J-Ki3"/>
+                                    <constraint firstItem="GQQ-HL-T7e" firstAttribute="height" secondItem="hYI-6w-nHN" secondAttribute="height" multiplier="0.257871" id="SyZ-mc-6dA"/>
+                                    <constraint firstAttribute="trailing" secondItem="hpT-vP-nKc" secondAttribute="trailing" id="TfU-wg-Y9S"/>
+                                    <constraint firstItem="GQQ-HL-T7e" firstAttribute="width" secondItem="hYI-6w-nHN" secondAttribute="width" multiplier="0.957333" id="UZa-1Y-pme"/>
+                                    <constraint firstItem="GQQ-HL-T7e" firstAttribute="top" secondItem="hpT-vP-nKc" secondAttribute="bottom" id="Zvd-2a-uJC"/>
+                                    <constraint firstItem="hpT-vP-nKc" firstAttribute="top" secondItem="hYI-6w-nHN" secondAttribute="top" id="sJo-6U-FHF"/>
+                                    <constraint firstItem="GQQ-HL-T7e" firstAttribute="centerX" secondItem="hYI-6w-nHN" secondAttribute="centerX" id="uPt-oS-r9X"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="KIf-lp-1Td"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hYI-6w-nHN" firstAttribute="leading" secondItem="KIf-lp-1Td" secondAttribute="leading" id="8qa-Yy-UHZ"/>
+                            <constraint firstItem="KIf-lp-1Td" firstAttribute="bottom" secondItem="hYI-6w-nHN" secondAttribute="bottom" id="WtD-5X-8Lj"/>
+                            <constraint firstItem="KIf-lp-1Td" firstAttribute="trailing" secondItem="hYI-6w-nHN" secondAttribute="trailing" id="esa-1Z-Mhi"/>
+                            <constraint firstItem="hYI-6w-nHN" firstAttribute="top" secondItem="KIf-lp-1Td" secondAttribute="top" constant="8" id="yHu-9p-C7f"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="qPA-Ru-ovv"/>
+                    <connections>
+                        <outlet property="addLocationTextField" destination="GQQ-HL-T7e" id="OYR-V9-FJH"/>
+                        <outlet property="locationLabel" destination="hpT-vP-nKc" id="t4g-2P-DSq"/>
+                        <segue destination="pfM-ZE-FlH" kind="show" identifier="LocateOnMapSeque" id="dou-pI-rtx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LNb-eB-RxL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3213.5999999999999" y="-259.52023988005999"/>
+        </scene>
+        <!--Locate On Map And Add Web Site Controller-->
+        <scene sceneID="HfU-1s-kuM">
+            <objects>
+                <viewController storyboardIdentifier="LocateOnMapAndAddLocationID" id="pfM-ZE-FlH" customClass="LocateOnMapAndAddWebSiteController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fHc-w3-TEU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OD4-oG-kEX">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                <subviews>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="b82-HM-VoN">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="475"/>
+                                    </mapView>
+                                    <textField opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Your Link To Share Here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6u9-oV-sbP">
+                                        <rect key="frame" x="8" y="475" width="359" height="172"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="26"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="send"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="b82-HM-VoN" secondAttribute="trailing" id="7JE-UQ-EAc"/>
+                                    <constraint firstAttribute="trailing" secondItem="6u9-oV-sbP" secondAttribute="trailing" constant="8" id="DGq-vI-g8Y"/>
+                                    <constraint firstItem="6u9-oV-sbP" firstAttribute="top" secondItem="OD4-oG-kEX" secondAttribute="top" constant="475" id="Vcs-BU-9kU"/>
+                                    <constraint firstItem="6u9-oV-sbP" firstAttribute="top" secondItem="b82-HM-VoN" secondAttribute="bottom" id="c1P-yO-vJA"/>
+                                    <constraint firstItem="6u9-oV-sbP" firstAttribute="leading" secondItem="OD4-oG-kEX" secondAttribute="leading" constant="8" id="fld-sh-rZa"/>
+                                    <constraint firstItem="b82-HM-VoN" firstAttribute="leading" secondItem="OD4-oG-kEX" secondAttribute="leading" id="oLo-QN-GR4"/>
+                                    <constraint firstAttribute="bottom" secondItem="6u9-oV-sbP" secondAttribute="bottom" id="paO-HK-mhV"/>
+                                    <constraint firstItem="b82-HM-VoN" firstAttribute="top" secondItem="OD4-oG-kEX" secondAttribute="top" id="yVM-cN-XMT"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ErI-Eb-z4C"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ErI-Eb-z4C" firstAttribute="bottom" secondItem="OD4-oG-kEX" secondAttribute="bottom" id="GxZ-h4-l3O"/>
+                            <constraint firstItem="OD4-oG-kEX" firstAttribute="top" secondItem="ErI-Eb-z4C" secondAttribute="top" id="OF1-vx-8d0"/>
+                            <constraint firstItem="OD4-oG-kEX" firstAttribute="leading" secondItem="ErI-Eb-z4C" secondAttribute="leading" id="X9b-xg-cam"/>
+                            <constraint firstItem="ErI-Eb-z4C" firstAttribute="trailing" secondItem="OD4-oG-kEX" secondAttribute="trailing" id="m5h-wy-WEm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="swz-HU-IPG"/>
+                    <connections>
+                        <outlet property="linkToShareTextField" destination="6u9-oV-sbP" id="QlL-fX-qYK"/>
+                        <outlet property="locateOnMapMapView" destination="b82-HM-VoN" id="Tdz-jh-LZ7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3l8-EE-Dv0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3909.5999999999999" y="-264.01799100449779"/>
+        </scene>
         <!--List Navigation Controller-->
         <scene sceneID="4iO-xs-q2O">
             <objects>
@@ -253,6 +364,9 @@
         <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
