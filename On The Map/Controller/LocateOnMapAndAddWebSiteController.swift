@@ -13,11 +13,11 @@ class LocateOnMapAndAddWebSiteController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var linkToShareTextField: UITextField!
     @IBOutlet weak var locateOnMapMapView: MKMapView!
     
-    //var locationCoordonate = [String: CLLocationDegrees]()
     var locationCoordinate: CLLocationCoordinate2D?
     
     var mapString: String?
     var userInfo: UserInfo?
+    var objectId: String?
     
     
     override func viewDidLoad() {
@@ -30,7 +30,7 @@ class LocateOnMapAndAddWebSiteController: UIViewController, MKMapViewDelegate {
         
         keyBoardNorfication()
         submitButton()
-        }
+    }
     
     fileprivate func submitButton() {
         let findOnMapButton = UIButton(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 60))
@@ -44,38 +44,55 @@ class LocateOnMapAndAddWebSiteController: UIViewController, MKMapViewDelegate {
     
     @objc func submitLocation(){
         
-        print("try to submit the location")
+        
         guard checkLinkToshare(userInput: linkToShareTextField.text!) != nil else{
             return
         }
-        
-        print("I pass it till here")
-        
+       
+        userInfo = userInfoToPost()
         
         if let userLocation = userInfo{
-            _ =  LocationInfo(objectId: userLocation.objectId ?? "", uniqueKey: userLocation.uniqueKey, firstName: userLocation.firstName, lastName: userLocation.lastName, mapString: mapString, mediaURL: linkToShareTextField.text, latitude: locationCoordinate?.latitude, longitude: locationCoordinate?.longitude, createdAt: userLocation.createdAt ?? "", updatedAt: userLocation.updatedAt ?? "")
-        }
-        if let userInfo = userInfo{
-        if OnTheMapClient.Auth.objectId == ""{
-            OnTheMapClient.postUserLocation(userInfo: userInfo) { (success, error) in
-                if success{
-                    DispatchQueue.main.async {
-                        self.navigationController?.popToRootViewController(animated: true)
-                    }
-                    print("success")
-                }else{
-                    DispatchQueue.main.async {
-                        self.disPlayAlertMessage(title: "Error!!!", message: "unable to post your info")
+            if OnTheMapClient.Auth.objectId == ""{
+                print("I am here because no error happen yet")
+                OnTheMapClient.postUserLocation(userInfo: userLocation) { (success, error) in
+                    if success{
+                        DispatchQueue.main.async {
+                            self.navigationController?.popToRootViewController(animated: true)
+                        }
+                    }else{
+                        DispatchQueue.main.async {
+                            self.disPlayAlertMessage(title: "error", message: error?.localizedDescription ?? "")
+                        }
                     }
                 }
+            }else{
+                let alert = UIAlertController(title: "Warning", message: "This user is already exist.\nWould you like to update it", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+                    self.navigationController?.popToRootViewController(animated: true)
+                }))
+                alert.addAction(UIAlertAction(title: "Overwrite", style: .default, handler: { (action) in
+                    OnTheMapClient.updateUserLocation(userInfo: userLocation) { (success, error) in
+                        if success{
+                            DispatchQueue.main.async {
+                                self.navigationController?.popToRootViewController(animated: true)
+                            }
+                        }else{
+                            DispatchQueue.main.async {
+                                self.disPlayAlertMessage(title: "Error", message: error?.localizedDescription ?? "")
+                            }
+                        }
+                    }
+                }))
+                self.present(alert, animated: true, completion: nil)
             }
         }
-        }
+        
     }
     
+    //verify the provided input is a valid url
     func checkLinkToshare(userInput: String) -> URL? {
         guard let url = URL(string: userInput), UIApplication.shared.canOpenURL(url) else {
-            disPlayAlertMessage(title: "Invalid URL", message: "Please check - http:// -  is included in your url")
+            disPlayAlertMessage(title: "Invalid URL", message: "Please check the URL link")
             return nil
         }
         return url
@@ -84,8 +101,6 @@ class LocateOnMapAndAddWebSiteController: UIViewController, MKMapViewDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "map.jpg")!)
-        
         let location = CLLocation(latitude: locationCoordinate?.latitude ?? 0.0, longitude: locationCoordinate?.longitude ?? 0.0)
         
         let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 20000, longitudinalMeters: 20000)
@@ -93,10 +108,10 @@ class LocateOnMapAndAddWebSiteController: UIViewController, MKMapViewDelegate {
         
         let anAnotation = MKPointAnnotation()
         if let locationCoordinate = locationCoordinate{
-        anAnotation.coordinate = locationCoordinate
-        anAnotation.title = "\(OnTheMapClient.Auth.studentFirstName) \(OnTheMapClient.Auth.studentLastName)"
-        locateOnMapMapView.addAnnotation(anAnotation)
-        linkToShareTextField.alpha = 1.0
+            anAnotation.coordinate = locationCoordinate
+            anAnotation.title = "\(OnTheMapClient.Auth.studentFirstName) \(OnTheMapClient.Auth.studentLastName)"
+            locateOnMapMapView.addAnnotation(anAnotation)
+            linkToShareTextField.alpha = 1.0
         }
     }
     
@@ -113,12 +128,22 @@ class LocateOnMapAndAddWebSiteController: UIViewController, MKMapViewDelegate {
     }
     
     //build the user info to post
-//    func userInfoToPost() -> UserInfo {
-//        var userInfo = [
-//            
-//        ]
-//        return UserInfo(userInfo)
-//    }
+    func userInfoToPost() -> UserInfo {
+        var userInfo = [
+            "firstName": OnTheMapClient.Auth.studentFirstName,
+            "lastName": OnTheMapClient.Auth.studentLastName,
+            "longitude": locationCoordinate?.longitude as Any,
+            "latitude": locationCoordinate?.latitude as Any,
+            "mapString": mapString as Any,
+            "mediaURL": linkToShareTextField.text!,
+            "uniqueKey": OnTheMapClient.Auth.key
+        ] as [String: AnyObject]
+        
+        if let objectId = objectId{
+            userInfo["objectId"] = objectId as AnyObject
+        }
+        return UserInfo(userInfo)
+    }
     
     /*
      the following will show and scroll the view
@@ -146,7 +171,7 @@ class LocateOnMapAndAddWebSiteController: UIViewController, MKMapViewDelegate {
         // call the 'keyboardWillHide' function when the view controlelr receive notification that keyboard is going to be hidden
         NotificationCenter.default.addObserver(self, selector: #selector(LocateOnMapAndAddWebSiteController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-
+    
 }
 
 extension LocateOnMapAndAddWebSiteController: UITextFieldDelegate{
@@ -162,7 +187,7 @@ extension LocateOnMapAndAddWebSiteController: UITextFieldDelegate{
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-
+        
         //submit post an return to root view controller
         return true
     }

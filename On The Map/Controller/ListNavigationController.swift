@@ -63,11 +63,12 @@ extension ListNavigationController: UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let aUser = userInfoList[indexPath.row]
         
-        if let first = aUser.firstName, let last = aUser.lastName{
+        let first = aUser.firstName
+        let last = aUser.lastName
             if first != "" && last != ""{
                 cell.textLabel?.text = "\(first) \(last)"
             }
-        }
+        
         return cell
     }
     

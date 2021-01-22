@@ -38,7 +38,7 @@ class AddCurrentUserLocation: UIViewController {
     
     @objc func findOnMap() {
         if let location = addLocationTextField.text{
-            locationToSearch(placeName: location)
+            locationToSearch(placeName: location.trimmingCharacters(in: .whitespaces))
         }
     }
     
@@ -129,7 +129,7 @@ extension AddCurrentUserLocation: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         if let placeNameToSearch = textField.text{
-            locationToSearch(placeName: placeNameToSearch)
+            locationToSearch(placeName: placeNameToSearch.trimmingCharacters(in: .whitespaces))
         }
         return true
     }

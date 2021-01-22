@@ -22,7 +22,6 @@ class TaskHelper {
                 return
             }
             
-            
             let decoder = JSONDecoder()
             do{
                 let responseObject = try decoder.decode(ResponseType.self, from: data)
@@ -49,6 +48,11 @@ class TaskHelper {
         
         let task = URLSession.shared.dataTask(with: request){
             data, response, error in
+            if error != nil{
+                print("error happen in \(#function) ")
+                completion(nil, error)
+            }
+            
             guard let data = data else{
                 DispatchQueue.main.async {
                     completion(nil, error)

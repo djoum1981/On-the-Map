@@ -60,7 +60,7 @@ class MapNavigationController: UIViewController {
             let latitude = CLLocationDegrees(location.latitude ?? 0.0)
             let longitude = CLLocationDegrees(location.longitude ?? 0.0)
             let mediaURL = location.mediaURL
-            let mapAnotationTitle = "\(location.firstName ?? "") \(location.lastName ?? "")"
+            let mapAnotationTitle = "\(location.firstName ) \(location.lastName)"
             let mapCoordonate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             let anAnotation = MKPointAnnotation()
             anAnotation.coordinate = mapCoordonate
