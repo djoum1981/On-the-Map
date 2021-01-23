@@ -46,21 +46,7 @@ struct UserInfo : Codable {
         case uniqueKey = "uniqueKey"
         case updatedAt = "updatedAt"
     }
-    
-        init(from decoder: Decoder) throws {
-            let values = try decoder.container(keyedBy: CodingKeys.self)
-            createdAt = try values.decodeIfPresent(String.self, forKey: .createdAt)
-            firstName = try values.decodeIfPresent(String.self, forKey: .firstName) ?? ""
-            lastName = try values.decodeIfPresent(String.self, forKey: .lastName) ?? ""
-            latitude = try values.decodeIfPresent(Double.self, forKey: .latitude)
-            longitude = try values.decodeIfPresent(Double.self, forKey: .longitude)
-            mapString = try values.decodeIfPresent(String.self, forKey: .mapString)
-            mediaURL = try values.decodeIfPresent(String.self, forKey: .mediaURL)
-            objectId = try values.decodeIfPresent(String.self, forKey: .objectId)
-            uniqueKey = try values.decodeIfPresent(String.self, forKey: .uniqueKey)
-            updatedAt = try values.decodeIfPresent(String.self, forKey: .updatedAt)
-        }
-    
+        
     
     init(_ info: [String: AnyObject]) {
         self.createdAt = info["createdAt"] as? String

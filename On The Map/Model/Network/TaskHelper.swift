@@ -37,8 +37,8 @@ class TaskHelper {
         task.resume()
     }
     
-    //will use to post or put
-    class func taskForPostRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: String, method: String?, completion: @escaping(ResponseType?, Error?)->Void) {
+    //will use to post or put with string input
+    class func taskForPostRequest<ResponseType: Decodable>(url: URL, login: Bool, responseType: ResponseType.Type, body: String, method: String?, completion: @escaping(ResponseType?, Error?)->Void) {
         
         var request = URLRequest(url: url)
         request.httpMethod = method == "PUT" ? "PUT" : "POST"
@@ -49,7 +49,7 @@ class TaskHelper {
         let task = URLSession.shared.dataTask(with: request){
             data, response, error in
             if error != nil{
-                print("error happen in \(#function) ")
+                print("error happen in \(#function) and the error is: \(error!)")
                 completion(nil, error)
             }
             
@@ -60,20 +60,44 @@ class TaskHelper {
                 return
             }
             
+            print("this is how the data look like \(String(data: data, encoding: .utf8) ?? "")")
+            print("decoding")
             do{
-                let newData = data.subdata(in: 5..<data.count)
-                let responseObject = try JSONDecoder().decode(ResponseType.self, from: newData)
-                DispatchQueue.main.async {
-                    completion(responseObject, nil)
+                let decodedData = try JSONDecoder().decode(responseType.self, from: data)
+                print("this is the decoded data: \(decodedData)")
+            }catch{
+                print(error)
+            }
+            
+            
+            do{
+                if login{
+                    let newData = data.subdata(in: 5..<data.count)
+                    let responseObject = try JSONDecoder().decode(ResponseType.self, from: newData)
+                    print("this is the decoded new data \(responseObject)")
+                    
+                    DispatchQueue.main.async {
+                        completion(responseObject, nil)
+                    }
+                }else{
+                    let responseObject = try JSONDecoder().decode(ResponseType.self, from: data)
+                    print("this is the decoded new data \(responseObject)")
+                    
+                    DispatchQueue.main.async {
+                        completion(responseObject, nil)
+                    }
                 }
             }catch{
                 DispatchQueue.main.async {
                     completion(nil, error)
                 }
             }
+            
+            
         }
         task.resume()
     }
 }
+
 
 

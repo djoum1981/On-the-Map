@@ -134,9 +134,11 @@ class LocateOnMapAndAddWebSiteController: UIViewController, MKMapViewDelegate {
             "lastName": OnTheMapClient.Auth.studentLastName,
             "longitude": locationCoordinate?.longitude as Any,
             "latitude": locationCoordinate?.latitude as Any,
+            
             "mapString": mapString as Any,
             "mediaURL": linkToShareTextField.text!,
             "uniqueKey": OnTheMapClient.Auth.key
+
         ] as [String: AnyObject]
         
         if let objectId = objectId{

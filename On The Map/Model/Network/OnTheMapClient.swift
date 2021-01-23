@@ -65,18 +65,18 @@ class OnTheMapClient {
     
     class func login(userEmail: String, userPassword: String, completion: @escaping(Bool, Error?)->Void) {
         let body = "{\"udacity\": {\"username\": \"\(userEmail)\", \"password\": \"\(userPassword)\"}}"
-        TaskHelper.taskForPostRequest(url: EndPoints.login.url, responseType: LoginResponse.self, body: body, method: nil) { (response, error) in
-            if let response = response{
-                Auth.sessionID = response.session.id
-                Auth.key = response.account.key
-                completion(true, nil)
-                print("session id is retrieved \(Auth.sessionID!)")
-                print("Key \(Auth.key)")
-            }else{
-                completion(false, nil)
-                print("unable to retrieve session id")
-            }
-        }
+        TaskHelper.taskForPostRequest(url: EndPoints.login.url, login: true, responseType: LoginResponse.self, body: body, method: nil) { (response, error) in
+                    if let response = response{
+                        Auth.sessionID = response.session.id
+                        Auth.key = response.account.key
+                        completion(true, nil)
+                        print("session id is retrieved \(Auth.sessionID!)")
+                        print("Key \(Auth.key)")
+                    }else{
+                        completion(false, nil)
+                        print("unable to retrieve session id")
+                    }
+                }
     }
     
     class func getLoginUserInfo(completion: @escaping (Bool, Error?)->Void) {
@@ -124,39 +124,48 @@ class OnTheMapClient {
     class func postUserLocation(userInfo: UserInfo, completion: @escaping (Bool, Error?)->Void ) {
         
         let body = "{\"firstName\":\"\(userInfo.firstName )\",\"lastName\":\"\(userInfo.lastName )\",\"longitude\":\(userInfo.longitude ?? 0.0),\"latitude\": \(userInfo.latitude ?? 0.0),\"mapString\":\"\(userInfo.mapString ?? "")\",\"mediaURL\": \"\(userInfo.mediaURL ?? "")\",\"uniqueKey\":\"\(userInfo.uniqueKey ?? "")\"}"
-      
-            TaskHelper.taskForPostRequest(url: EndPoints.addLocation.url, responseType: PostLocationResponse.self, body: body, method: nil) { (response, error) in
-            if error != nil{
-                print("*** Error in \(#function):\n \(error?.localizedDescription ?? "")")
-                return
-            }
-
-            if let response = response, response.createdAt != nil{
-                Auth.objectId = response.objectId ?? ""
-                completion(true, nil)
-                print(response)
-            }else{
-                completion(false, error)
-            }
-        }
+        
+        
+                    TaskHelper.taskForPostRequest(url: EndPoints.addLocation.url, login: false, responseType: PostLocationResponse.self, body: body, method: nil) { (response, error) in
+                    if error != nil{
+                        print("*** Error in \(#function):\n \(error?.localizedDescription ?? "")")
+                        print("\n\n\n")
+                        print(error ?? "")
+                        print("\n\n")
+                        return
+                    }
+        
+                    if let response = response{
+                        Auth.objectId = response.objectID
+                        completion(true, nil)
+                        print(response)
+                    }else{
+                        completion(false, error)
+                    }
+                }
+    }
+    
+    // to update location
+    class func updateUserLocation(userInfo: UserInfo, completion: @escaping(Bool, Error?)->Void){
+        let body  = "{\"uniqueKey\": \"\(userInfo.uniqueKey ?? "")\", \"firstName\": \"\(userInfo.firstName )\", \"lastName\": \"\(userInfo.lastName )\",\"mapString\": \"\(userInfo.mapString ?? "")\", \"mediaURL\": \"\(userInfo.mediaURL ?? "")\",\"latitude\": \(userInfo.latitude ?? 0.0), \"longitude\": \(userInfo.longitude ?? 0.0)}"
+        
+        TaskHelper.taskForPostRequest(url: EndPoints.upDateALocation.url, login: false, responseType:UpdateResponse.self, body: body, method: "PUT") { (response, error) in
+                        if error != nil{
+                            print("*** Error in \(#function):\n \(error?.localizedDescription ?? "")")
+                            return
+                        }
+                        if let response = response, response.updatedAt != nil{
+                            completion(true, nil)
+                        }else{
+                            completion(false, error)
+                        }
+                    }
+        
+        
 
     }
     
-    //to update location
-    class func updateUserLocation(userInfo: UserInfo, completion: @escaping(Bool, Error?)->Void){
-        let body  = "{\"uniqueKey\": \"\(userInfo.uniqueKey ?? "")\", \"firstName\": \"\(userInfo.firstName )\", \"lastName\": \"\(userInfo.lastName )\",\"mapString\": \"\(userInfo.mapString ?? "")\", \"mediaURL\": \"\(userInfo.mediaURL ?? "")\",\"latitude\": \(userInfo.latitude ?? 0.0), \"longitude\": \(userInfo.longitude ?? 0.0)}"
-            
-        TaskHelper.taskForPostRequest(url: EndPoints.upDateALocation.url, responseType:UpdateResponse.self, body: body, method: "PUT") { (response, error) in
-            if error != nil{
-                print("*** Error in \(#function):\n \(error?.localizedDescription ?? "")")
-                return
-            }
-            if let response = response, response.updatedAt != nil{
-                completion(true, nil)
-            }else{
-                completion(false, error)
-            }
-        }
-        
-    }
+    
+    
+    
 }
