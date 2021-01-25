@@ -27,20 +27,9 @@ class LoginController: UIViewController {
         loginIndicator.isHidden = true
     }
     
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        loginField.text = ""
-        passwordField.text = ""
-    }
+
     
     @IBAction func loginPressed(_ sender: UIButton) {
-        
-        if passwordField.isFirstResponder {
-            passwordField.endEditing(true)
-        }else{
-            loginField.endEditing(true)
-        }
         signIn()
     }
     
@@ -105,10 +94,8 @@ extension LoginController: UITextFieldDelegate{
         }
     }
     
-    
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        return true
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
-    
 }
 
