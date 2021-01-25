@@ -16,7 +16,6 @@
 		1D1C11C525AC925D00189E84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D1C11C325AC925D00189E84 /* LaunchScreen.storyboard */; };
 		1D1C11D925AD526200189E84 /* MapNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1C11D825AD526200189E84 /* MapNavigationController.swift */; };
 		1D1C11DC25AD5A8900189E84 /* ListNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1C11DB25AD5A8900189E84 /* ListNavigationController.swift */; };
-		1D3B4DC025B92DDB00B43383 /* LocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B4DBF25B92DDB00B43383 /* LocationInfo.swift */; };
 		1D4723F625ADE87F0013DA40 /* OnTheMapClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4723F525ADE87F0013DA40 /* OnTheMapClient.swift */; };
 		1D4723FD25AF39D40013DA40 /* TaskHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4723FC25AF39D40013DA40 /* TaskHelper.swift */; };
 		1D47240025AF6D1B0013DA40 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4723FF25AF6D1B0013DA40 /* LoginResponse.swift */; };
@@ -37,7 +36,6 @@
 		1D1C11C625AC925D00189E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D1C11D825AD526200189E84 /* MapNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNavigationController.swift; sourceTree = "<group>"; };
 		1D1C11DB25AD5A8900189E84 /* ListNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNavigationController.swift; sourceTree = "<group>"; };
-		1D3B4DBF25B92DDB00B43383 /* LocationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfo.swift; sourceTree = "<group>"; };
 		1D4723F525ADE87F0013DA40 /* OnTheMapClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapClient.swift; sourceTree = "<group>"; };
 		1D4723FC25AF39D40013DA40 /* TaskHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskHelper.swift; path = "On The Map/model/Network/TaskHelper.swift"; sourceTree = SOURCE_ROOT; };
 		1D4723FF25AF6D1B0013DA40 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
@@ -121,7 +119,6 @@
 			children = (
 				1D1C11D525AC931B00189E84 /* Network */,
 				1D47240225AF6D320013DA40 /* Response */,
-				1D3B4DBF25B92DDB00B43383 /* LocationInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -220,7 +217,6 @@
 				1D4723F625ADE87F0013DA40 /* OnTheMapClient.swift in Sources */,
 				1D1C11BD25AC925B00189E84 /* LoginController.swift in Sources */,
 				1D1C11B925AC925B00189E84 /* AppDelegate.swift in Sources */,
-				1D3B4DC025B92DDB00B43383 /* LocationInfo.swift in Sources */,
 				1DB7818525B7212000D87746 /* LocateOnMapAndAddWebSiteController.swift in Sources */,
 				1D1C11D925AD526200189E84 /* MapNavigationController.swift in Sources */,
 				1D1C11BB25AC925B00189E84 /* SceneDelegate.swift in Sources */,

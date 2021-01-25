@@ -41,7 +41,10 @@ class ListNavigationController: UIViewController {
         userInfoList.removeAll()
         OnTheMapClient.getUsersLocation(completion: {locations, error in
             DispatchQueue.main.async {
-                self.userInfoList = locations ?? []
+                let listUsers = locations ?? []
+                self.userInfoList = listUsers.sorted{
+                    $0.firstName < $1.firstName
+                }
                 self.userLocationsTBV.reloadData()
             }
         })
@@ -55,7 +58,6 @@ class ListNavigationController: UIViewController {
 
 extension ListNavigationController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(userInfoList.count)
         return userInfoList.count
     }
     

@@ -7,7 +7,6 @@
 // contains information of the log in student
 import Foundation
 
-
 struct UserLocation : Codable {
     let results : [UserInfo]?
     
@@ -22,7 +21,9 @@ struct UserLocation : Codable {
 }
 
 
-struct UserInfo : Codable {
+struct UserInfo : Codable, Comparable {
+   
+    
     let createdAt: String?
         let firstName: String
         let lastName: String
@@ -61,22 +62,8 @@ struct UserInfo : Codable {
         self.updatedAt = info["updatedAt"] as? String
     }
     
-    var labelName: String {
-            var name = ""
-            if !firstName.isEmpty {
-                name = firstName
-            }
-            if !lastName.isEmpty {
-                if name.isEmpty {
-                    name = lastName
-                } else {
-                    name += " \(lastName)"
-                }
-            }
-            if name.isEmpty {
-                name = "FirstName LastName"
-            }
-            return name
-        }
+    static func < (lhs: UserInfo, rhs: UserInfo) -> Bool {
+        return lhs.firstName < rhs.lastName
+    }
 }
 

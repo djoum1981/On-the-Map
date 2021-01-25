@@ -42,7 +42,7 @@ class OnTheMapClient {
         var stringValue: String{
             switch self {
             case .getLocationList:
-                return EndPoints.base + "/StudentLocation/StudentLocation?limit=100"
+                return EndPoints.base + "/StudentLocation?order=createdAt" //"/StudentLocation?limit=100"
             case .addLocation:
                 return EndPoints.base + "/StudentLocation"
             case .upDateALocation:
@@ -66,17 +66,15 @@ class OnTheMapClient {
     class func login(userEmail: String, userPassword: String, completion: @escaping(Bool, Error?)->Void) {
         let body = "{\"udacity\": {\"username\": \"\(userEmail)\", \"password\": \"\(userPassword)\"}}"
         TaskHelper.taskForPostRequest(url: EndPoints.login.url, login: true, responseType: LoginResponse.self, body: body, method: nil) { (response, error) in
-                    if let response = response{
-                        Auth.sessionID = response.session.id
-                        Auth.key = response.account.key
-                        completion(true, nil)
-                        print("session id is retrieved \(Auth.sessionID!)")
-                        print("Key \(Auth.key)")
-                    }else{
-                        completion(false, nil)
-                        print("unable to retrieve session id")
-                    }
-                }
+            if let response = response{
+                Auth.sessionID = response.session.id
+                Auth.key = response.account.key
+                completion(true, nil)
+            }else{
+                completion(false, nil)
+                print("unable to retrieve session id")
+            }
+        }
     }
     
     class func getLoginUserInfo(completion: @escaping (Bool, Error?)->Void) {
@@ -87,7 +85,6 @@ class OnTheMapClient {
                 Auth.objectId = response.objectId ?? ""
                 completion(true, nil)
             }else{
-                print("no user data could be retrieve")
                 completion(false, error)
             }
         }
@@ -102,8 +99,6 @@ class OnTheMapClient {
                 return
             }
             Auth.sessionID = nil
-            print(String(data: (data?.subdata(in: 5..<data!.count))!, encoding: .utf8)!)
-            print("logout was successfull")
         }
         task.resume()
     }
@@ -111,7 +106,7 @@ class OnTheMapClient {
     // to get user location
     class func getUsersLocation(completion: @escaping([UserInfo]?, Error?)->Void) {
         TaskHelper.taskForGetRequest(url: EndPoints.getLocationList.url, responseType: UserLocation.self) { (response, error) in
-            if let response = response{
+                if let response = response{
                 completion(response.results, nil)
             }else{
                 completion([], error)
@@ -125,24 +120,16 @@ class OnTheMapClient {
         
         let body = "{\"firstName\":\"\(userInfo.firstName )\",\"lastName\":\"\(userInfo.lastName )\",\"longitude\":\(userInfo.longitude ?? 0.0),\"latitude\": \(userInfo.latitude ?? 0.0),\"mapString\":\"\(userInfo.mapString ?? "")\",\"mediaURL\": \"\(userInfo.mediaURL ?? "")\",\"uniqueKey\":\"\(userInfo.uniqueKey ?? "")\"}"
         
-        
-                    TaskHelper.taskForPostRequest(url: EndPoints.addLocation.url, login: false, responseType: PostLocationResponse.self, body: body, method: nil) { (response, error) in
-                    if error != nil{
-                        print("*** Error in \(#function):\n \(error?.localizedDescription ?? "")")
-                        print("\n\n\n")
-                        print(error ?? "")
-                        print("\n\n")
-                        return
-                    }
-        
-                    if let response = response{
-                        Auth.objectId = response.objectID
-                        completion(true, nil)
-                        print(response)
-                    }else{
-                        completion(false, error)
-                    }
-                }
+        TaskHelper.taskForPostRequest(url: EndPoints.addLocation.url, login: false, responseType: PostLocationResponse.self, body: body, method: nil) { (response, error) in
+            
+            if let response = response{
+                Auth.objectId = response.objectID
+                completion(true, nil)
+                print(response)
+            }else{
+                completion(false, error)
+            }
+        }
     }
     
     // to update location
@@ -150,22 +137,15 @@ class OnTheMapClient {
         let body  = "{\"uniqueKey\": \"\(userInfo.uniqueKey ?? "")\", \"firstName\": \"\(userInfo.firstName )\", \"lastName\": \"\(userInfo.lastName )\",\"mapString\": \"\(userInfo.mapString ?? "")\", \"mediaURL\": \"\(userInfo.mediaURL ?? "")\",\"latitude\": \(userInfo.latitude ?? 0.0), \"longitude\": \(userInfo.longitude ?? 0.0)}"
         
         TaskHelper.taskForPostRequest(url: EndPoints.upDateALocation.url, login: false, responseType:UpdateResponse.self, body: body, method: "PUT") { (response, error) in
-                        if error != nil{
-                            print("*** Error in \(#function):\n \(error?.localizedDescription ?? "")")
-                            return
-                        }
-                        if let response = response, response.updatedAt != nil{
-                            completion(true, nil)
-                        }else{
-                            completion(false, error)
-                        }
-                    }
-        
-        
-
+            if error != nil{
+                print("*** Error in \(#function):\n \(error?.localizedDescription ?? "")")
+                return
+            }
+            if let response = response, response.updatedAt != nil{
+                completion(true, nil)
+            }else{
+                completion(false, error)
+            }
+        }
     }
-    
-    
-    
-    
 }

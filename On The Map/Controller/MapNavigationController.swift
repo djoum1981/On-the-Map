@@ -10,6 +10,8 @@ import MapKit
 
 class MapNavigationController: UIViewController {
     
+    @IBOutlet weak var mapLoadingIndicator: UIActivityIndicatorView!
+    
     @IBOutlet weak var map: MKMapView!
     var mapAnotations = [MKPointAnnotation]()
     var resetMap = true
@@ -24,8 +26,7 @@ class MapNavigationController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_refresh"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(refreshButtonPressed))
     }
     
-    //var studentLocations: Array<UserInfo> = Array()
-    
+   
     fileprivate func getPinsForMap() {
         OnTheMapClient.getUsersLocation { (locations, error) in
             if let locations = locations{
@@ -40,6 +41,8 @@ class MapNavigationController: UIViewController {
     }
     
     @objc func addPinButtonPress() {
+        
+        
         if let addCurrentUserLocationVC = storyboard?.instantiateViewController(identifier: "AddCurrentUserLocationID"){
             addCurrentUserLocationVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(addCurrentUserLocationVC, animated: true)
