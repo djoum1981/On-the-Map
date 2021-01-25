@@ -14,7 +14,7 @@ class LocateOnMapAndAddWebSiteController: UIViewController{
     var locationCoordinate: CLLocationCoordinate2D?
     var mapAndMediaInfo = [String:Any]()
     
-    var userInfo: UserInfo?
+    var userInfo: StudentInformation?
     var objectId: String?
     
     override func viewDidLoad() {
@@ -101,7 +101,7 @@ class LocateOnMapAndAddWebSiteController: UIViewController{
     }
     
     //build the user info to post
-    func userInfoToPost() -> UserInfo {
+    func userInfoToPost() -> StudentInformation {
         var userInfo = [
             "firstName": OnTheMapClient.Auth.studentFirstName,
             "lastName": OnTheMapClient.Auth.studentLastName,
@@ -116,7 +116,7 @@ class LocateOnMapAndAddWebSiteController: UIViewController{
         if let objectId = objectId{
             userInfo["objectId"] = objectId as AnyObject
         }
-        return UserInfo(userInfo)
+        return StudentInformation(userInfo)
     }
 }
 

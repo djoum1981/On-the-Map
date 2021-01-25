@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-class MapNavigationController: UIViewController {
+class MapViewController: UIViewController {
     
     @IBOutlet weak var mapLoadingIndicator: UIActivityIndicatorView!
     
@@ -21,11 +21,11 @@ class MapNavigationController: UIViewController {
         map.delegate = self
         navigationItem.title = "On The Map"
         
+     
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_pin"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(addPinButtonPress))
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_refresh"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(refreshButtonPressed))
     }
-    
    
     fileprivate func getPinsForMap() {
         OnTheMapClient.getUsersLocation { (locations, error) in
@@ -41,21 +41,17 @@ class MapNavigationController: UIViewController {
     }
     
     @objc func addPinButtonPress() {
-        
-        
         if let addCurrentUserLocationVC = storyboard?.instantiateViewController(identifier: "AddCurrentUserLocationID"){
             addCurrentUserLocationVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(addCurrentUserLocationVC, animated: true)
         }
-        
     }
     
     @objc func refreshButtonPressed(){
         getPinsForMap()
     }
     
-    
-    func getPins(locations: [UserInfo]){
+    func getPins(locations: [StudentInformation]){
         if locations.count < 1 {return}
         self.map.removeAnnotations(self.mapAnotations)
         self.mapAnotations.removeAll()
@@ -74,11 +70,13 @@ class MapNavigationController: UIViewController {
         
         DispatchQueue.main.async {
             self.map.addAnnotations(self.mapAnotations)
+            self.mapLoadingIndicator.stopAnimating()
+            self.mapLoadingIndicator.isHidden = true
         }
     }
 }
 
-extension MapNavigationController: MKMapViewDelegate{
+extension MapViewController: MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView

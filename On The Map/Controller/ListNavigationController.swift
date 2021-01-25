@@ -10,7 +10,8 @@ import UIKit
 class ListNavigationController: UIViewController {
     
     @IBOutlet weak var userLocationsTBV: UITableView!
-    var userInfoList = [UserInfo]()
+    var studentList = [StudentInformation]()
+    let tableActivityIndicator = UIActivityIndicatorView(style: .large)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,44 +39,45 @@ class ListNavigationController: UIViewController {
     
     //to load the info from all users
     fileprivate func getUsers() {
-        userInfoList.removeAll()
+        studentList.removeAll()
+        tableActivityIndicator.center = view.center
+        view.addSubview(tableActivityIndicator)
+        tableActivityIndicator.startAnimating()
+        
         OnTheMapClient.getUsersLocation(completion: {locations, error in
+            self.studentList = locations ?? []
             DispatchQueue.main.async {
-                let listUsers = locations ?? []
-                self.userInfoList = listUsers.sorted{
-                    $0.firstName < $1.firstName
-                }
                 self.userLocationsTBV.reloadData()
+                self.tableActivityIndicator.stopAnimating()
+                self.tableActivityIndicator.isHidden = true
             }
         })
     }
     
-    
     @objc func refreshButtonPressed(){
         getUsers()
+        self.userLocationsTBV.reloadData()
     }
 }
 
 extension ListNavigationController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userInfoList.count
+        return studentList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let aUser = userInfoList[indexPath.row]
-        
+        let aUser = studentList[indexPath.row]
         let first = aUser.firstName
         let last = aUser.lastName
             if first != "" && last != ""{
                 cell.textLabel?.text = "\(first) \(last)"
             }
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let urlString = userInfoList[indexPath.row].mediaURL{
+        if let urlString = studentList[indexPath.row].mediaURL{
             if let url = URL(string: urlString){
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }

@@ -16,6 +16,7 @@ class LoginController: UIViewController {
     @IBOutlet weak var loginField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
+    
     @IBOutlet weak var loginIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
@@ -23,10 +24,15 @@ class LoginController: UIViewController {
         
         loginField.delegate = self
         passwordField.delegate = self
-        
-        loginIndicator(indicator: false)
+        loginIndicator.isHidden = true
     }
     
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        loginField.text = ""
+        passwordField.text = ""
+    }
     
     @IBAction func loginPressed(_ sender: UIButton) {
         
@@ -45,6 +51,7 @@ class LoginController: UIViewController {
     
     
     @IBAction func facebookSignUpPressed(_ sender: UIButton) {
+        
     }
     
     func signIn() {
@@ -53,20 +60,19 @@ class LoginController: UIViewController {
         
         if login != "" && password != ""{
             //-MARK: show the next page
-            DispatchQueue.main.async {
-                self.loginIndicator(indicator: true)
-            }
             
             OnTheMapClient.login(userEmail: login!, userPassword: password!) { (success, error) in
-                
+                self.loginIndicator.isHidden = false
+                self.loginIndicator.startAnimating()
                 if success{
                     DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "TabBarEntrySequee", sender: nil)
-                        self.loginIndicator(indicator: false)
+                        self.performSegue(withIdentifier: "TabarEntrySeque", sender: nil)
+                        self.loginIndicator.stopAnimating()
+                        self.loginIndicator.isHidden = true
                     }
                 }else{
                     DispatchQueue.main.async { [self] in
-                        loginIndicator(indicator: false)
+                        self.loginIndicator.isHidden = true
                         self.disPlayErrorMessage(title: "Login Error", message: "Please check your login creadential and try again later")
                     }
                 }
@@ -78,16 +84,6 @@ class LoginController: UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
-    }
-    
-    func loginIndicator(indicator: Bool) {
-        if indicator{
-            loginIndicator.startAnimating()
-        }else{
-            loginIndicator.stopAnimating()
-        }
-        signInButton.isEnabled = !indicator
-       
     }
 }
 

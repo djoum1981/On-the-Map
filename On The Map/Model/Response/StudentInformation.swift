@@ -7,8 +7,8 @@
 // contains information of the log in student
 import Foundation
 
-struct UserLocation : Codable {
-    let results : [UserInfo]?
+struct StudentLocations : Codable {
+    let results : [StudentInformation]?
     
     enum CodingKeys: String, CodingKey {
         case results = "results"
@@ -16,12 +16,12 @@ struct UserLocation : Codable {
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        results = try values.decodeIfPresent([UserInfo].self, forKey: .results)
+        results = try values.decodeIfPresent([StudentInformation].self, forKey: .results)
     }
 }
 
 
-struct UserInfo : Codable, Comparable {
+struct StudentInformation : Codable, Comparable {
    
     
     let createdAt: String?
@@ -62,8 +62,8 @@ struct UserInfo : Codable, Comparable {
         self.updatedAt = info["updatedAt"] as? String
     }
     
-    static func < (lhs: UserInfo, rhs: UserInfo) -> Bool {
-        return lhs.firstName < rhs.lastName
+    static func < (lhs: StudentInformation, rhs: StudentInformation) -> Bool {
+        return lhs.updatedAt ?? ""  < rhs.updatedAt ?? ""
     }
 }
 

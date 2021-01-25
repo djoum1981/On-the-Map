@@ -42,7 +42,7 @@ class OnTheMapClient {
         var stringValue: String{
             switch self {
             case .getLocationList:
-                return EndPoints.base + "/StudentLocation?order=createdAt" //"/StudentLocation?limit=100"
+                return EndPoints.base +  "/StudentLocation?limit=100"
             case .addLocation:
                 return EndPoints.base + "/StudentLocation"
             case .upDateALocation:
@@ -78,7 +78,7 @@ class OnTheMapClient {
     }
     
     class func getLoginUserInfo(completion: @escaping (Bool, Error?)->Void) {
-        TaskHelper.taskForGetRequest(url: EndPoints.userInfo.url, responseType: UserInfo.self) { (response, error) in
+        TaskHelper.taskForGetRequest(url: EndPoints.userInfo.url, responseType: StudentInformation.self) { (response, error) in
             if let response = response{
                 Auth.studentFirstName = response.firstName
                 Auth.studentLastName = response.lastName
@@ -104,10 +104,10 @@ class OnTheMapClient {
     }
     
     // to get user location
-    class func getUsersLocation(completion: @escaping([UserInfo]?, Error?)->Void) {
-        TaskHelper.taskForGetRequest(url: EndPoints.getLocationList.url, responseType: UserLocation.self) { (response, error) in
+    class func getUsersLocation(completion: @escaping([StudentInformation]?, Error?)->Void) {
+        TaskHelper.taskForGetRequest(url: EndPoints.getLocationList.url, responseType: StudentLocations.self) { (response, error) in
                 if let response = response{
-                completion(response.results, nil)
+                    completion(response.results?.sorted(), nil)
             }else{
                 completion([], error)
             }
@@ -116,7 +116,7 @@ class OnTheMapClient {
     
     
     // to post user location
-    class func postUserLocation(userInfo: UserInfo, completion: @escaping (Bool, Error?)->Void ) {
+    class func postUserLocation(userInfo: StudentInformation, completion: @escaping (Bool, Error?)->Void ) {
         
         let body = "{\"firstName\":\"\(userInfo.firstName )\",\"lastName\":\"\(userInfo.lastName )\",\"longitude\":\(userInfo.longitude ?? 0.0),\"latitude\": \(userInfo.latitude ?? 0.0),\"mapString\":\"\(userInfo.mapString ?? "")\",\"mediaURL\": \"\(userInfo.mediaURL ?? "")\",\"uniqueKey\":\"\(userInfo.uniqueKey ?? "")\"}"
         
@@ -133,7 +133,7 @@ class OnTheMapClient {
     }
     
     // to update location
-    class func updateUserLocation(userInfo: UserInfo, completion: @escaping(Bool, Error?)->Void){
+    class func updateUserLocation(userInfo: StudentInformation, completion: @escaping(Bool, Error?)->Void){
         let body  = "{\"uniqueKey\": \"\(userInfo.uniqueKey ?? "")\", \"firstName\": \"\(userInfo.firstName )\", \"lastName\": \"\(userInfo.lastName )\",\"mapString\": \"\(userInfo.mapString ?? "")\", \"mediaURL\": \"\(userInfo.mediaURL ?? "")\",\"latitude\": \(userInfo.latitude ?? 0.0), \"longitude\": \(userInfo.longitude ?? 0.0)}"
         
         TaskHelper.taskForPostRequest(url: EndPoints.upDateALocation.url, login: false, responseType:UpdateResponse.self, body: body, method: "PUT") { (response, error) in

@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D16736E25B167950045D66A /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D16736D25B167950045D66A /* UserInfo.swift */; };
+		1D16736E25B167950045D66A /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D16736D25B167950045D66A /* StudentInformation.swift */; };
 		1D1C11B925AC925B00189E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1C11B825AC925B00189E84 /* AppDelegate.swift */; };
 		1D1C11BB25AC925B00189E84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1C11BA25AC925B00189E84 /* SceneDelegate.swift */; };
 		1D1C11BD25AC925B00189E84 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1C11BC25AC925B00189E84 /* LoginController.swift */; };
 		1D1C11C025AC925B00189E84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D1C11BE25AC925B00189E84 /* Main.storyboard */; };
 		1D1C11C225AC925D00189E84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D1C11C125AC925D00189E84 /* Assets.xcassets */; };
 		1D1C11C525AC925D00189E84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D1C11C325AC925D00189E84 /* LaunchScreen.storyboard */; };
-		1D1C11D925AD526200189E84 /* MapNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1C11D825AD526200189E84 /* MapNavigationController.swift */; };
+		1D1C11D925AD526200189E84 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1C11D825AD526200189E84 /* MapViewController.swift */; };
 		1D1C11DC25AD5A8900189E84 /* ListNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1C11DB25AD5A8900189E84 /* ListNavigationController.swift */; };
 		1D4723F625ADE87F0013DA40 /* OnTheMapClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4723F525ADE87F0013DA40 /* OnTheMapClient.swift */; };
 		1D4723FD25AF39D40013DA40 /* TaskHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4723FC25AF39D40013DA40 /* TaskHelper.swift */; };
@@ -25,7 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1D16736D25B167950045D66A /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		1D16736D25B167950045D66A /* StudentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
 		1D1C11B525AC925B00189E84 /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D1C11B825AC925B00189E84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1D1C11BA25AC925B00189E84 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -34,7 +34,7 @@
 		1D1C11C125AC925D00189E84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1D1C11C425AC925D00189E84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1D1C11C625AC925D00189E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1D1C11D825AD526200189E84 /* MapNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNavigationController.swift; sourceTree = "<group>"; };
+		1D1C11D825AD526200189E84 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		1D1C11DB25AD5A8900189E84 /* ListNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNavigationController.swift; sourceTree = "<group>"; };
 		1D4723F525ADE87F0013DA40 /* OnTheMapClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapClient.swift; sourceTree = "<group>"; };
 		1D4723FC25AF39D40013DA40 /* TaskHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskHelper.swift; path = "On The Map/model/Network/TaskHelper.swift"; sourceTree = SOURCE_ROOT; };
@@ -96,7 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				1D1C11BC25AC925B00189E84 /* LoginController.swift */,
-				1D1C11D825AD526200189E84 /* MapNavigationController.swift */,
+				1D1C11D825AD526200189E84 /* MapViewController.swift */,
 				1D1C11DB25AD5A8900189E84 /* ListNavigationController.swift */,
 				1DB7818125B7204B00D87746 /* AddCurrentUserLocationController.swift */,
 				1DB7818425B7212000D87746 /* LocateOnMapAndAddWebSiteController.swift */,
@@ -136,7 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				1D4723FF25AF6D1B0013DA40 /* LoginResponse.swift */,
-				1D16736D25B167950045D66A /* UserInfo.swift */,
+				1D16736D25B167950045D66A /* StudentInformation.swift */,
 				1DB7817E25B3CC4900D87746 /* PostLocationResponse.swift */,
 			);
 			path = Response;
@@ -213,12 +213,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DB7818225B7204B00D87746 /* AddCurrentUserLocationController.swift in Sources */,
-				1D16736E25B167950045D66A /* UserInfo.swift in Sources */,
+				1D16736E25B167950045D66A /* StudentInformation.swift in Sources */,
 				1D4723F625ADE87F0013DA40 /* OnTheMapClient.swift in Sources */,
 				1D1C11BD25AC925B00189E84 /* LoginController.swift in Sources */,
 				1D1C11B925AC925B00189E84 /* AppDelegate.swift in Sources */,
 				1DB7818525B7212000D87746 /* LocateOnMapAndAddWebSiteController.swift in Sources */,
-				1D1C11D925AD526200189E84 /* MapNavigationController.swift in Sources */,
+				1D1C11D925AD526200189E84 /* MapViewController.swift in Sources */,
 				1D1C11BB25AC925B00189E84 /* SceneDelegate.swift in Sources */,
 				1D4723FD25AF39D40013DA40 /* TaskHelper.swift in Sources */,
 				1D47240025AF6D1B0013DA40 /* LoginResponse.swift in Sources */,
