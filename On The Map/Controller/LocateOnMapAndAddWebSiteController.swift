@@ -120,7 +120,6 @@ class LocateOnMapAndAddWebSiteController: UIViewController{
     }
 }
 
-
 extension LocateOnMapAndAddWebSiteController: MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"

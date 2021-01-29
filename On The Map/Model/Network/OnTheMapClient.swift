@@ -24,8 +24,8 @@ class OnTheMapClient {
         static var key: String = ""
         static var expiration: String? = nil
         static var objectId = ""
-        static var studentFirstName = "John"
-        static var studentLastName = "Louis"
+        static var studentFirstName = "Paul"
+        static var studentLastName = "Dicholome"
     }
     
     enum EndPoints {
@@ -42,7 +42,7 @@ class OnTheMapClient {
         var stringValue: String{
             switch self {
             case .getLocationList:
-                return EndPoints.base +  "/StudentLocation?limit=100"
+                return EndPoints.base +  "/StudentLocation?order=-updatedAt&limit=100"
             case .addLocation:
                 return EndPoints.base + "/StudentLocation"
             case .upDateALocation:
@@ -63,7 +63,7 @@ class OnTheMapClient {
         }
     }
     
-    class func login(userEmail: String, userPassword: String, completion: @escaping(Bool, Error?)->Void) {
+    class func login(userEmail: String, userPassword: String, completion: @escaping(Bool,  Error?)->Void) {
         let body = "{\"udacity\": {\"username\": \"\(userEmail)\", \"password\": \"\(userPassword)\"}}"
         TaskHelper.taskForPostRequest(url: EndPoints.login.url, login: true, responseType: LoginResponse.self, body: body, method: nil) { (response, error) in
             if let response = response{
@@ -107,7 +107,7 @@ class OnTheMapClient {
     class func getUsersLocation(completion: @escaping([StudentInformation]?, Error?)->Void) {
         TaskHelper.taskForGetRequest(url: EndPoints.getLocationList.url, responseType: StudentLocations.self) { (response, error) in
                 if let response = response{
-                    completion(response.results?.sorted(), nil)
+                    completion(response.results, nil)
             }else{
                 completion([], error)
             }

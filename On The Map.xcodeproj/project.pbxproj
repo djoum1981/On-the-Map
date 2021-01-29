@@ -16,6 +16,7 @@
 		1D1C11C525AC925D00189E84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D1C11C325AC925D00189E84 /* LaunchScreen.storyboard */; };
 		1D1C11D925AD526200189E84 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1C11D825AD526200189E84 /* MapViewController.swift */; };
 		1D1C11DC25AD5A8900189E84 /* ListNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1C11DB25AD5A8900189E84 /* ListNavigationController.swift */; };
+		1D352F2E25C2F7B100126436 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D352F2D25C2F7B100126436 /* NetworkMonitor.swift */; };
 		1D4723F625ADE87F0013DA40 /* OnTheMapClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4723F525ADE87F0013DA40 /* OnTheMapClient.swift */; };
 		1D4723FD25AF39D40013DA40 /* TaskHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4723FC25AF39D40013DA40 /* TaskHelper.swift */; };
 		1D47240025AF6D1B0013DA40 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4723FF25AF6D1B0013DA40 /* LoginResponse.swift */; };
@@ -36,6 +37,7 @@
 		1D1C11C625AC925D00189E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D1C11D825AD526200189E84 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		1D1C11DB25AD5A8900189E84 /* ListNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNavigationController.swift; sourceTree = "<group>"; };
+		1D352F2D25C2F7B100126436 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		1D4723F525ADE87F0013DA40 /* OnTheMapClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapClient.swift; sourceTree = "<group>"; };
 		1D4723FC25AF39D40013DA40 /* TaskHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskHelper.swift; path = "On The Map/model/Network/TaskHelper.swift"; sourceTree = SOURCE_ROOT; };
 		1D4723FF25AF6D1B0013DA40 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			children = (
 				1D4723F525ADE87F0013DA40 /* OnTheMapClient.swift */,
 				1D4723FC25AF39D40013DA40 /* TaskHelper.swift */,
+				1D352F2D25C2F7B100126436 /* NetworkMonitor.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				1D47240025AF6D1B0013DA40 /* LoginResponse.swift in Sources */,
 				1D1C11DC25AD5A8900189E84 /* ListNavigationController.swift in Sources */,
 				1DB7817F25B3CC4900D87746 /* PostLocationResponse.swift in Sources */,
+				1D352F2E25C2F7B100126436 /* NetworkMonitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,18 +21,38 @@ class MapViewController: UIViewController {
         map.delegate = self
         navigationItem.title = "On The Map"
         
-     
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_pin"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(addPinButtonPress))
+        let addPinButton = UIBarButtonItem(image: UIImage(named: "icon_pin"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(addPinButtonPress))
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_refresh"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(refreshButtonPressed))
+        let refreshButton = UIBarButtonItem(image: UIImage(named: "icon_refresh"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(refreshButtonPressed))
+        
+        navigationItem.rightBarButtonItems = [refreshButton, addPinButton]
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "power"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(logoutPressed))
     }
    
     fileprivate func getPinsForMap() {
         OnTheMapClient.getUsersLocation { (locations, error) in
             if let locations = locations{
+                if locations.isEmpty{
+                    self.disPlayErrorMessage(title: "Error", message: "An error occur.")
+                    return
+                }
                 self.getPins(locations: locations)
             }
         }
+    }
+    
+    func disPlayErrorMessage(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Try Again", style: .default, handler: { (action) in
+            self.getPinsForMap() // try to refresh
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func logoutPressed() {
+        OnTheMapClient.logout()
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -91,7 +111,6 @@ extension MapViewController: MKMapViewDelegate{
         }
         return pinView
     }
-    
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView{

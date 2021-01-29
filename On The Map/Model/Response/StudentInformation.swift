@@ -21,9 +21,8 @@ struct StudentLocations : Codable {
 }
 
 
-struct StudentInformation : Codable, Comparable {
+struct StudentInformation : Codable {
    
-    
     let createdAt: String?
         let firstName: String
         let lastName: String
@@ -60,10 +59,6 @@ struct StudentInformation : Codable, Comparable {
         self.longitude = info["longitude"] as? Double ?? 0.0
         self.objectId = info["objectId"] as? String
         self.updatedAt = info["updatedAt"] as? String
-    }
-    
-    static func < (lhs: StudentInformation, rhs: StudentInformation) -> Bool {
-        return lhs.updatedAt ?? ""  < rhs.updatedAt ?? ""
     }
 }
 

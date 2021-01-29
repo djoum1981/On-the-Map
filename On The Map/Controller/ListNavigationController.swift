@@ -23,7 +23,18 @@ class ListNavigationController: UIViewController {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "power"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(logoutPressed))
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_refresh"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(refreshButtonPressed))
+       let refreshButton = UIBarButtonItem(image: UIImage(named: "icon_refresh"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(refreshButtonPressed))
+        
+        let addPinButton = UIBarButtonItem(image: UIImage(named: "icon_pin"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(addPinButtonPress))
+        
+        navigationItem.rightBarButtonItems = [refreshButton, addPinButton]
+    }
+    
+    @objc func addPinButtonPress(){
+        if let addCurrentUserLocationVC = storyboard?.instantiateViewController(identifier: "AddCurrentUserLocationID"){
+            addCurrentUserLocationVC.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(addCurrentUserLocationVC, animated: true)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -68,9 +79,10 @@ extension ListNavigationController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let aUser = studentList[indexPath.row]
+        
         let first = aUser.firstName
         let last = aUser.lastName
-            if first != "" && last != ""{
+        if !first.isEmpty && !last.isEmpty{
                 cell.textLabel?.text = "\(first) \(last)"
             }
         return cell

@@ -13,6 +13,7 @@ class AddCurrentUserLocation: UIViewController {
     @IBOutlet weak var linkToShareTextField: UITextField!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var addLocationTextField: UITextField!
+    let activityIndicator = UIActivityIndicatorView(style: .large)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +22,8 @@ class AddCurrentUserLocation: UIViewController {
         customizeTextField(textField: addLocationTextField)
         customizeTextField(textField: linkToShareTextField)
         locationLabel.backgroundColor = UIColor(patternImage: UIImage(named: "map")!)
-        navigationItem.setHidesBackButton(true, animated: true)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAddingCurrentUserLocation))
+        navigationItem.title = "Add Location"
         
         HideShowKeyboardNotification()
         
@@ -48,20 +49,29 @@ class AddCurrentUserLocation: UIViewController {
     
     func getLocation(forPlaceCalled name: String, complition: @escaping(CLLocation?) ->Void){
         let geoCoder = CLGeocoder()
+        
+        activityIndicator.center = view.center
+        view.addSubview(activityIndicator)
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        
         geoCoder.geocodeAddressString(name, completionHandler: {placemark, error in
             guard error  == nil else{
                 self.disPlayErrorMessage(title: "Location Error", message: "Please check the location and try again")
+                self.activityIndicator.isHidden = true
                 return
             }
             
             guard let placemark = placemark?[0] else{
                 self.disPlayErrorMessage(title: "Location Error", message: "Please check the location and try again")
+                self.activityIndicator.isHidden = true
                 complition(nil)
                 return
             }
             
             guard let location = placemark.location else{
                 self.disPlayErrorMessage(title: "Location Error", message: "Please check the location and try again")
+                self.activityIndicator.isHidden = true
                 complition(nil)
                 return
             }
@@ -76,6 +86,12 @@ class AddCurrentUserLocation: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
+        
+    }
 }
 
 // Mark - to move the view when keyboard block the textfield
@@ -141,9 +157,7 @@ extension AddCurrentUserLocation: UITextFieldDelegate{
             
         }
     }
-    
-    
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if let linkField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField{
@@ -151,6 +165,7 @@ extension AddCurrentUserLocation: UITextFieldDelegate{
         }else{
             textField.resignFirstResponder()
             //send it over here
+            findOnMap()
         }
         return true
     }

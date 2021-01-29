@@ -10,7 +10,6 @@ import SafariServices
 
 class LoginController: UIViewController {
     
-    @IBOutlet weak var facebookButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var loginField: UITextField!
@@ -21,6 +20,17 @@ class LoginController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "map")!)
+        loginField.layer.borderWidth = 2
+        loginField.layer.borderColor = #colorLiteral(red: 0, green: 0.6990359426, blue: 0.9034714699, alpha: 1)
+        loginField.layer.cornerRadius = 8
+        passwordField.layer.borderWidth = 2
+        passwordField.layer.borderColor = #colorLiteral(red: 0, green: 0.6990359426, blue: 0.9034714699, alpha: 1)
+        passwordField.layer.cornerRadius = 8
+        
+        loginField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        
+        passwordField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
         
         loginField.delegate = self
         passwordField.delegate = self
@@ -39,20 +49,25 @@ class LoginController: UIViewController {
     }
     
     
-    @IBAction func facebookSignUpPressed(_ sender: UIButton) {
-        
-    }
-    
     func signIn() {
         let login = loginField.text
         let password = passwordField.text
         
+        if !NetworkMonitor.shared.isConnected{
+            disPlayErrorMessage(title: "Connection Error", message: "Please check you internet connection and try again")
+            return
+        }
+        
         if login != "" && password != ""{
-            //-MARK: show the next page
             
             OnTheMapClient.login(userEmail: login!, userPassword: password!) { (success, error) in
-                self.loginIndicator.isHidden = false
-                self.loginIndicator.startAnimating()
+              
+                DispatchQueue.main.async {
+                    self.loginIndicator.isHidden = false
+                    self.loginIndicator.startAnimating()
+                    self.loginIndicator.startAnimating()
+                }
+                
                 if success{
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "TabarEntrySeque", sender: nil)
@@ -60,7 +75,7 @@ class LoginController: UIViewController {
                         self.loginIndicator.isHidden = true
                     }
                 }else{
-                    DispatchQueue.main.async { [self] in
+                    DispatchQueue.main.async {
                         self.loginIndicator.isHidden = true
                         self.disPlayErrorMessage(title: "Login Error", message: "Please check your login creadential and try again later")
                     }
@@ -72,7 +87,7 @@ class LoginController: UIViewController {
     func disPlayErrorMessage(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -89,9 +104,6 @@ extension LoginController: UITextFieldDelegate{
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.resignFirstResponder()
-        if textField == passwordField{
-            signIn()
-        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
